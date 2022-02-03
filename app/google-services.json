@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "95532960549",
+    "project_id": "e-librairie",
+    "storage_bucket": "e-librairie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95532960549:android:ac2faf9a4c8846089368cc",
+        "android_client_info": {
+          "package_name": "com.example.bookmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95532960549-unc8f9mb7ek7al5sb54v4nu7g3bah0lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu8ic0dgYLzaL6SggT4bSkNwaY9dcuwJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95532960549-unc8f9mb7ek7al5sb54v4nu7g3bah0lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
