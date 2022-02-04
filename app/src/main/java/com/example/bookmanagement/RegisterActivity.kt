@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import com.example.bookmanagement.databinding.ActivityMainBinding
 import com.example.bookmanagement.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import java.util.regex.Pattern
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
+    private val db = Firebase.firestore
 
     private lateinit var binding: ActivityRegisterBinding
 
@@ -108,9 +109,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun updateUserInfo() {
-
         progressDialog.setMessage("enregistrement des informations utilisateur")
-
         //timestamp
         val timestamp=System.currentTimeMillis()
 
@@ -118,33 +117,27 @@ class RegisterActivity : AppCompatActivity() {
 
         val uid =firebaseAuth.uid
 
-        //setup data to add in db
-        val hashMap:HashMap<String,Any?> = HashMap()
+        val userInfoHashMap = hashMapOf(
+            "uid" to firebaseAuth.uid,
+            "email" to email,
+            "name" to name,
+            "profileImage" to "",
+            "userType" to "user",
+            "timestamp" to FieldValue.serverTimestamp()
+        )
+        val userFileRef = db.collection("userInfos").document(firebaseAuth.currentUser!!.uid)
 
-        hashMap["uid"]=uid
-        hashMap["email"]=email
-        hashMap["name"]=name
-        hashMap["profileImage"]=""
-        hashMap["userType"]="user"
-        hashMap["timestamp"]=timestamp
+        userFileRef.set(userInfoHashMap).addOnSuccessListener {
 
-        //set data to db
-
-        val ref=FirebaseDatabase.getInstance().getReference("Users")
-        ref.child(uid!!)
-            .setValue(hashMap)
-            .addOnSuccessListener {
-
-                progressDialog.dismiss()
-                Toast.makeText(this,"le compte est créé",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@RegisterActivity,UserActivity::class.java))
-                finish()
-            }
+            progressDialog.dismiss()
+            Toast.makeText(this,"le compte est créé",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@RegisterActivity,UserActivity::class.java))
+            finish()
+        }
             .addOnFailureListener {e->
                 Toast.makeText(this,"Échec d'enregistement des info a cause de ${e.message}",Toast.LENGTH_SHORT).show()
                 progressDialog.dismiss()
             }
-
     }
 
 

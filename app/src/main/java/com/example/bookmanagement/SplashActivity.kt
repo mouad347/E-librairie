@@ -1,16 +1,16 @@
 package com.example.bookmanagement
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
+    val db = Firebase.firestore
 
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -18,51 +18,39 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        firebaseAuth= FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
         Handler().postDelayed(Runnable {
             checkUser()
-        },1000)
+        }, 1000)
     }
 
     private fun checkUser() {
 
         //get current user,if logged in or not
-        val firebaseUser=firebaseAuth.currentUser
-        if (firebaseUser==null){
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser == null) {
             //user not logged in,goto main screen
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }
-        else{
-            val ref= FirebaseDatabase.getInstance().getReference("Users")
-            ref.child(firebaseUser.uid)
-                .addListenerForSingleValueEvent(object: ValueEventListener {
+        } else {
+            val userFileRef = db.collection("userInfos").document(firebaseAuth.uid.toString())
+            userFileRef.get().addOnSuccessListener { document ->
+                if (document.data != null) {
+                    if (document.data!!["userType"] == "user") {
+                        startActivity(Intent(this@SplashActivity, UserActivity::class.java))
+                        finish()
+                    } else if (document.data!!["userType"] == "admin") {
+                        startActivity(Intent(this@SplashActivity, UserActivity::class.java))
+                        finish()
+                    } else {
+                        Log.d("myError", "Splash activity : user type isn't correct")
 
-                    override fun onDataChange(snapshot: DataSnapshot) {
-
-                        //get user type e.g user or admin
-                        val userType=snapshot.child("userType").value
-                        if(userType=="user"){
-
-                            startActivity(Intent(this@SplashActivity,UserActivity::class.java))
-                            finish()
-
-                        }
-                        else if (userType=="admin"){
-                            //its admin,open admin dashboard
-                            startActivity(Intent(this@SplashActivity,UserActivity::class.java))
-                            finish()
-                        }
                     }
+                }else {
+                    Log.d("myError", "Splash activity : user document not found")
+                }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-
-
-
-                })
+            }
         }
-
     }
 }
