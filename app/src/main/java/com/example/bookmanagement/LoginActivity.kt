@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e->
                 Toast.makeText(this, "Echec de connexion a cause de ${e.message}!!!", Toast.LENGTH_SHORT).show()
-
+                progressDialog.dismiss()
 
             }
 

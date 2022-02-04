@@ -142,7 +142,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             .addOnFailureListener {e->
                 Toast.makeText(this,"Échec d'enregistement des info a cause de ${e.message}",Toast.LENGTH_SHORT).show()
-
+                progressDialog.dismiss()
             }
 
     }
