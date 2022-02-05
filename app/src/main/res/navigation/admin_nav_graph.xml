@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/adminMainViewFragment">
+    <fragment
+        android:id="@+id/adminMainViewFragment"
+        android:name="com.example.bookmanagement.AdminMainViewFragment"
+        android:label="fragment_admin_main_view"
+        tools:layout="@layout/fragment_admin_main_view" >
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/adminAddBookFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminAddBookFragment2"
+        android:name="com.example.bookmanagement.AdminAddBookFragment"
+        android:label="fragment_admin_add_book"
+        tools:layout="@layout/fragment_admin_add_book" >
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/adminMainViewFragment" />
+    </fragment>
+</navigation>
