@@ -15,13 +15,16 @@
         <entry key="app/src/main/res/drawable/ic_lock_gray.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_logout_white.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_person_gray.xml" value="0.2828125" />
-        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_admin_add_book.xml" value="0.3015625" />
+        <entry key="app/src/main/res/layout/fragment_admin_main_view.xml" value="0.3015625" />
+        <entry key="app/src/main/res/layout/item_list.xml" value="0.2526041666666667" />
       </map>
     </option>
   </component>
