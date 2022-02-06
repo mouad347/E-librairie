@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,6 +50,18 @@ class UserActivity : AppCompatActivity() {
         BAdapter = BookAdapter(bookList)
 
         recyclerview.adapter = BAdapter
+
+        BAdapter.setonItemClickListener(object :BookAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+               // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
+                val mIntent=Intent(this@UserActivity,BookDetailles::class.java)
+                startActivity(mIntent)
+                finish()
+
+            }
+
+
+        })
 
         /**getData firebase*/
         getBooks()

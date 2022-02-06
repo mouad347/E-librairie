@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_logout_white.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_person_gray.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_book_detailles.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26666666666666666" />
