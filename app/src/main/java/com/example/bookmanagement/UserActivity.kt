@@ -54,7 +54,27 @@ class UserActivity : AppCompatActivity() {
         BAdapter.setonItemClickListener(object :BookAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
+
+                val newlist=bookList[position]
+                val name=newlist.name_book
+                val writer=newlist.name_writer
+                val  nbrpages=newlist.number_of_pages
+                val  nbrAvailableB=newlist.number_of_available_copies
+                val description =newlist.description_book
+
+
+
+
+
+
+
                 val mIntent=Intent(this@UserActivity,BookDetailles::class.java)
+                mIntent.putExtra("name",name)
+                mIntent.putExtra("writer",writer)
+                mIntent.putExtra("nbrpages",nbrpages.toString())
+                mIntent.putExtra("nbrAvailableB",nbrAvailableB.toString())
+                mIntent.putExtra("description",description)
+
                 startActivity(mIntent)
                 finish()
 
