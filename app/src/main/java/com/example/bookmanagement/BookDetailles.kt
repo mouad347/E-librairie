@@ -44,6 +44,7 @@ class BookDetailles : AppCompatActivity() {
 
         reservbut.setOnClickListener {
               rentBookByUser(isbn)
+            Toast.makeText(this,"you clicked ",Toast.LENGTH_SHORT).show()
         }
 
     }
