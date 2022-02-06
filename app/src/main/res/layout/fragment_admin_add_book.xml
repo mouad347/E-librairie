@@ -63,11 +63,24 @@
         android:ems="10"
         android:hint="number of pages"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton_AddBook"
+        app:layout_constraintBottom_toTopOf="@+id/numberOfAvailableCopiesInput_AddBook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writerNameInput_AddBook" />
+
+    <EditText
+        android:id="@+id/numberOfAvailableCopiesInput_AddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="number of available copies"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/bookDescriptionInput_AddBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfPagesInput_AddBook" />
 
     <Button
         android:id="@+id/submitButton_AddBook"
@@ -76,9 +89,9 @@
         android:text="submit"
         app:layout_constraintBottom_toTopOf="@+id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberOfPagesInput_AddBook" />
+        app:layout_constraintTop_toBottomOf="@+id/bookDescriptionInput_AddBook" />
 
     <Button
         android:id="@+id/button_second"
@@ -90,4 +103,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/submitButton_AddBook" />
+
+    <EditText
+        android:id="@+id/bookDescriptionInput_AddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton_AddBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfAvailableCopiesInput_AddBook" />
 </androidx.constraintlayout.widget.ConstraintLayout>

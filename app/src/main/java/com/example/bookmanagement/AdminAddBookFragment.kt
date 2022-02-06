@@ -93,8 +93,11 @@ class AdminAddBookFragment : Fragment() {
                     //if document (book) don't exist in the database
                     book.name_writer = binding.writerNameInputAddBook.text.toString()
                     book.name_book = binding.bookNameInputAddBook.text.toString()
+                    book.description_book = binding.bookDescriptionInputAddBook.text.toString()
                     book.number_of_pages =
                         Integer.parseInt(binding.numberOfPagesInputAddBook.text.toString())
+                    book.number_of_available_copies =
+                        Integer.parseInt(binding.numberOfAvailableCopiesInputAddBook.text.toString())
                     book.storage_Location = uploadEbook()
                     if (!book.storage_Location.isNullOrBlank()) {
                         //check if the document got updated or not
