@@ -56,6 +56,7 @@ class UserActivity : AppCompatActivity() {
                // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
 
                 val newlist=bookList[position]
+                val isbn=newlist.isbn
                 val name=newlist.name_book
                 val writer=newlist.name_writer
                 val  nbrpages=newlist.number_of_pages
@@ -69,6 +70,7 @@ class UserActivity : AppCompatActivity() {
 
 
                 val mIntent=Intent(this@UserActivity,BookDetailles::class.java)
+                mIntent.putExtra("isbn",isbn)
                 mIntent.putExtra("name",name)
                 mIntent.putExtra("writer",writer)
                 mIntent.putExtra("nbrpages",nbrpages.toString())
