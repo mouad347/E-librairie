@@ -12,3 +12,4 @@ fun showToast(context: Context?, message: String) {
         Toast.LENGTH_LONG
     ).show();
 }
+

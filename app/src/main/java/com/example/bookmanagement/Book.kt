@@ -37,6 +37,7 @@ class Book {
 
     fun getDataHashMap(): HashMap<String, Any?> {
         return hashMapOf(
+            "isbn" to isbn,
             "name_book" to name_book,
             "name_writer" to name_writer,
             "number_of_pages" to number_of_pages,

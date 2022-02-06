@@ -32,6 +32,11 @@ class BookAdapter(var booklist: ArrayList<Book>) :
         holder.bookname.text = book.name_book
         holder.writername.text = book.name_writer
         holder.Nbrpage.text = book.number_of_pages.toString()
+        holder.itemView.setOnClickListener{
+            rentBookByUser(book.isbn!!)
+        }
+
+
 
     }
 
