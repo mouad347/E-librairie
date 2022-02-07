@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +39,11 @@ class UserActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+        binding.myBooksButton.setOnClickListener(){
+            startActivity(Intent(this, rented_books_activity::class.java))
+            finish()
+
+        }
 
         recyclerview = findViewById(R.id.listbook)
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -51,31 +54,28 @@ class UserActivity : AppCompatActivity() {
 
         recyclerview.adapter = BAdapter
 
-        BAdapter.setonItemClickListener(object :BookAdapter.onItemClickListener{
+
+
+        BAdapter.setonItemClickListener(object : BookAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-               // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
 
-                val newlist=bookList[position]
-                val isbn=newlist.isbn
-                val name=newlist.name_book
-                val writer=newlist.name_writer
-                val  nbrpages=newlist.number_of_pages
-                val  nbrAvailableB=newlist.number_of_available_copies
-                val description =newlist.description_book
-
-
+                val newlist = bookList[position]
+                val isbn = newlist.isbn
+                val name = newlist.name_book
+                val writer = newlist.name_writer
+                val nbrpages = newlist.number_of_pages
+                val nbrAvailableB = newlist.number_of_available_copies
+                val description = newlist.description_book
 
 
-
-
-
-                val mIntent=Intent(this@UserActivity,BookDetailles::class.java)
-                mIntent.putExtra("isbn",isbn)
-                mIntent.putExtra("name",name)
-                mIntent.putExtra("writer",writer)
-                mIntent.putExtra("nbrpages",nbrpages.toString())
-                mIntent.putExtra("nbrAvailableB",nbrAvailableB.toString())
-                mIntent.putExtra("description",description)
+                val mIntent = Intent(this@UserActivity, BookDetailles::class.java)
+                mIntent.putExtra("isbn", isbn)
+                mIntent.putExtra("name", name)
+                mIntent.putExtra("writer", writer)
+                mIntent.putExtra("nbrpages", nbrpages.toString())
+                mIntent.putExtra("nbrAvailableB", nbrAvailableB.toString())
+                mIntent.putExtra("description", description)
 
                 startActivity(mIntent)
                 finish()
@@ -120,7 +120,6 @@ class UserActivity : AppCompatActivity() {
                     return
 
                 }
-
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
 
@@ -130,14 +129,9 @@ class UserActivity : AppCompatActivity() {
                 }
 
                 BAdapter.notifyDataSetChanged()
-
             }
         }
-
         )
-
-
     }
-
 
 }

@@ -1,12 +1,16 @@
 package com.example.bookmanagement
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.bookmanagement.databinding.FragmentAdminMainViewBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -41,4 +45,5 @@ class AdminMainViewFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

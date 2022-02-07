@@ -15,16 +15,22 @@
         <entry key="app/src/main/res/drawable/ic_lock_gray.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_logout_white.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_person_gray.xml" value="0.2828125" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.3448979591836735" />
+        <entry key="app/src/main/res/layout-w936dp/activity_login2.xml" value="0.198046875" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_book_detailles.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_rented_books.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/activity_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_admin_add_book.xml" value="0.3015625" />
         <entry key="app/src/main/res/layout/fragment_admin_main_view.xml" value="0.3015625" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.2526041666666667" />
       </map>
     </option>
