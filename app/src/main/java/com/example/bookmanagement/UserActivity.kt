@@ -3,18 +3,31 @@ package com.example.bookmanagement
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.inputmethod.EditorInfo
+
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookmanagement.databinding.ActivityUserBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserActivity : AppCompatActivity() {
 
     private lateinit var recyclerview: RecyclerView
     private lateinit var bookList: ArrayList<Book>
+    private lateinit var templist:ArrayList<Book>
+
     private lateinit var BAdapter: BookAdapter
     private lateinit var db: FirebaseFirestore
 
@@ -85,11 +98,35 @@ class UserActivity : AppCompatActivity() {
 
         })
 
+        SearchBooks("")
+        binding.inputsearch.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+
+
+                   SearchBooks(s.toString())
+
+
+
+
+            }
+        })
+
+
         /**getData firebase*/
-        getBooks()
+
 
 
     }
+
+
 
     private fun checkUser() {
         //get current user
@@ -109,7 +146,11 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-    private fun getBooks() {
+
+
+    private fun SearchBooks(searchedBook:String) {
+
+        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
         db = FirebaseFirestore.getInstance()
         db.collection("books").addSnapshotListener(object : EventListener<QuerySnapshot> {
             @SuppressLint("NotifyDataSetChanged")
@@ -120,13 +161,17 @@ class UserActivity : AppCompatActivity() {
                     return
 
                 }
+                bookList.clear()
                 for (dc: DocumentChange in value?.documentChanges!!) {
-                    if (dc.type == DocumentChange.Type.ADDED) {
+                    if (dc.type == DocumentChange.Type.ADDED&&dc.document.toObject(Book::class.java).name_book!!.toLowerCase(Locale.getDefault()).contains(searched)) {
 
                         bookList.add(dc.document.toObject(Book::class.java))
                     }
 
                 }
+
+
+
 
                 BAdapter.notifyDataSetChanged()
             }
