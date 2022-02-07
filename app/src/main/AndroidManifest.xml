@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
+            android:name=".ProfileUser"
+            android:exported="false" />
+        <activity
             android:name=".rented_books_activity"
             android:exported="false" />
-
         <activity
             android:name=".BookDetailles"
             android:exported="false" />

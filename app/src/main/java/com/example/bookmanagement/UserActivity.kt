@@ -119,9 +119,32 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
+        binding.searchkeyword.addTextChangedListener(object : TextWatcher {
 
-        /**getData firebase*/
+            override fun afterTextChanged(s: Editable) {}
 
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+
+
+                SearchBooksDesc(s.toString())
+
+
+
+
+            }
+        })
+
+        binding.subTitleTv.setOnClickListener{
+
+            startActivity(Intent(this,  ProfileUser::class.java))
+            finish()
+
+        }
 
 
     }
@@ -163,7 +186,7 @@ class UserActivity : AppCompatActivity() {
                 }
                 bookList.clear()
                 for (dc: DocumentChange in value?.documentChanges!!) {
-                    if (dc.type == DocumentChange.Type.ADDED&&dc.document.toObject(Book::class.java).name_book!!.toLowerCase(Locale.getDefault()).contains(searched)) {
+                    if (dc.type == DocumentChange.Type.ADDED&&(dc.document.toObject(Book::class.java).name_book!!.toLowerCase(Locale.getDefault()).contains(searched))) {
 
                         bookList.add(dc.document.toObject(Book::class.java))
                     }
@@ -178,5 +201,37 @@ class UserActivity : AppCompatActivity() {
         }
         )
     }
+
+    private fun SearchBooksDesc(searchedBook:String) {
+
+        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
+        db = FirebaseFirestore.getInstance()
+        db.collection("books").addSnapshotListener(object : EventListener<QuerySnapshot> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+
+                    Log.e("myError", "UserActivity:Firestore Error " + error.message.toString())
+                    return
+
+                }
+                bookList.clear()
+                for (dc: DocumentChange in value?.documentChanges!!) {
+                    if (dc.type == DocumentChange.Type.ADDED&&(dc.document.toObject(Book::class.java).description_book!!.toLowerCase(Locale.getDefault()).contains(searched))) {
+
+                        bookList.add(dc.document.toObject(Book::class.java))
+                    }
+
+                }
+
+
+
+
+                BAdapter.notifyDataSetChanged()
+            }
+        }
+        )
+    }
+
 
 }
