@@ -48,6 +48,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
 
+
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,11 +57,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listbook"
-            android:layout_width="425dp"
-            android:layout_height="673dp"
+            android:layout_width="432dp"
+            android:layout_height="586dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.668"
             tools:listitem="@layout/item_list">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -74,6 +77,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listbook" />
+
+        <EditText
+            android:id="@+id/inputsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:hint="Rechercher un livre"
+            app:layout_constraintBottom_toTopOf="@+id/listbook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
