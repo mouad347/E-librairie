@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/form_toolbar1.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/drawable/form_toolbar2.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_back_white.xml" value="0.2828125" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.135" />
         <entry key="app/src/main/res/drawable/ic_email_gray.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/ic_lock_gray.xml" value="0.2828125" />
@@ -32,6 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_admin_main_view.xml" value="0.3015625" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/menu/menu_item.xml" value="0.26666666666666666" />
       </map>
     </option>
   </component>
