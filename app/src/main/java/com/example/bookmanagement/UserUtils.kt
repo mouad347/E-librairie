@@ -1,6 +1,9 @@
 package com.example.bookmanagement
 
 import android.content.Context
+import android.database.Cursor
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -70,3 +73,5 @@ fun rentBookByUser(isbn: String) {
         .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
         .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
 }
+
+

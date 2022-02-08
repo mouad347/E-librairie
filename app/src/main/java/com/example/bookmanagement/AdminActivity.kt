@@ -26,29 +26,22 @@ class AdminActivity : AppCompatActivity() {
         binding.logoutBtn.setOnClickListener{
             firebaseAuth.signOut()
             checkUser()
-
-
         }
     }
 
     private fun checkUser() {
         //get current user
         val firebaseUser=firebaseAuth.currentUser
-
         if(firebaseUser==null){
             //not logget in goto main screen
             startActivity(Intent(this,MainActivity::class.java))
             finish()
-
         }
         else{
             //logged in,get and show user info
             val email = firebaseUser.email
             //set to textview of toolbar
             binding.subTitleTv.text=email
-
         }
-
-
     }
 }

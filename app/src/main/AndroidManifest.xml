@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".Detailletest"
-            android:exported="false" />
-        <activity
-            android:name=".test"
-            android:exported="false" />
-        <activity
             android:name=".ProfileUser"
             android:exported="false" />
         <activity
@@ -48,6 +42,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-    </application>
 
+
+    </application>
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE"/>
 </manifest>

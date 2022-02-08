@@ -3,6 +3,7 @@ package com.example.bookmanagement
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,14 +15,28 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookmanagement.databinding.FragmentAdminAddBookBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import id.zelory.compressor.constraint.size
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.File
+import java.util.*
 
 
 class AdminAddBookFragment : Fragment() {
 
     private var _binding: FragmentAdminAddBookBinding? = null
     lateinit var ImageURI: Uri
-
+    lateinit var pdfURI:Uri
+    var random: Random = Random()
+    val book = Book()
+    var imageIsUploaded=false;
+    var pdfIsUploaded=false;
     //firebase database object (firestore)
     val db = Firebase.firestore
 
@@ -40,36 +55,85 @@ class AdminAddBookFragment : Fragment() {
 
         _binding = FragmentAdminAddBookBinding.inflate(inflater, container, false)
         binding.submitButtonAddBook.setOnClickListener {
-            //submitBook()
+            submitBook()
+        }
+        binding.ebookUploadField.setOnClickListener {
+            SelectPdf()
+        }
+        binding.imageUploadField.setOnClickListener {
             SelectImage()
-            //uploadEbook()
         }
         return binding.root
     }
 
-    private fun uploadEbook(): String? {
-
-
-        //functiion responsible for uploading the ebook file to firebase storage
+    private fun image_upload(): String? {
+        val rand=random.nextInt(99999).toString()
+        var compressedImageFile: File? = null
         val storageRef = storage.reference
-        val riversRef = storageRef.child("images/${ImageURI.lastPathSegment}")
-        var uploadTask = riversRef.putFile(ImageURI)
+        var actualImageFile = FileUtil.from(requireActivity().baseContext, ImageURI)
+        val riversRef = storageRef.child("images/${rand+ImageURI.lastPathSegment}")
 
-        showToast(activity, "image =  " + ImageURI.toString())
+        var uploadTask: UploadTask? = null
 
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener {
-            showToast(activity, "pdf file upload failed ")
-            uploadTask.exception?.message?.let { it1 -> Log.w("BookAddition", it1) }
-        }.addOnSuccessListener { taskSnapshot ->
-            showToast(activity, "pdf file upload done ")
+        GlobalScope.launch {
+            compressedImageFile = Compressor.compress(requireContext(), actualImageFile) {
+                resolution(853, 480)
+                quality(60)
+                format(Bitmap.CompressFormat.WEBP)
+                size(1_048_576) // 1 MB
+            }
+            //functiion responsible for uploading the ebook file to firebase storage
+            //  showToast(activity, "image =  " + ImageURI.toString())
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask = riversRef.putStream(compressedImageFile!!.inputStream())
+            uploadTask!!.addOnFailureListener {
+            //    showToast(activity, "pdf file upload failed ")
+                uploadTask!!.exception?.message?.let { it1 -> Log.w("BookAddition", it1) }
+            }.addOnSuccessListener { taskSnapshot ->
+            //    showToast(activity, "pdf file upload done ")
+            }
         }
-        while (!uploadTask.isComplete) {
+        while (uploadTask==null || !(uploadTask!!.isComplete)) {
             //wait for the task to complete
+            Thread.sleep(1000)
             // TODO: 20/01/2022  look up for async await comm 
         }
-        if (uploadTask.isSuccessful) return "images/${ImageURI.lastPathSegment}"
-        else return null
+        if (uploadTask!!.isSuccessful) {
+            showToast(activity, "image file upload done ")
+            return "images/${rand+ImageURI.lastPathSegment}"}
+        else { showToast(activity, "pdf file upload failed ")
+            return null}
+
+    }
+    private fun pdf_upload(): String? {
+        val rand=random.nextInt(99999).toString()
+        val storageRef = storage.reference
+        val riversRef = storageRef.child("pdfs/${rand+pdfURI.lastPathSegment}")
+
+        var uploadTask: UploadTask? = null
+
+            //functiion responsible for uploading the ebook file to firebase storage
+            //  showToast(activity, "image =  " + ImageURI.toString())
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask = riversRef.putFile(pdfURI)
+            uploadTask!!.addOnFailureListener {
+                    showToast(activity, "pdf file upload failed ")
+            uploadTask!!.exception?.message?.let { it1 -> Log.w("BookAddition", it1) }
+            }.addOnSuccessListener { taskSnapshot ->
+                    showToast(activity, "pdf file upload done ")
+            }
+
+        while (uploadTask==null || !(uploadTask!!.isComplete)) {
+            //wait for the task to complete
+            Thread.sleep(1000)
+            // TODO: 20/01/2022  look up for async await comm
+        }
+        if (uploadTask!!.isSuccessful) {
+            showToast(activity, "pdf file upload done ")
+            return "pdfs/${rand+pdfURI.lastPathSegment}"}
+        else { showToast(activity, "pdf file upload failed ")
+            return null}
+
     }
 
     fun submitBook() {
@@ -78,7 +142,6 @@ class AdminAddBookFragment : Fragment() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val book = Book()
         book.isbn = binding.isbnInputAddBook.text.toString()
         //a pointer to the book document in firebase
         val bookDbRef = db.collection("books").document(book.isbn!!)
@@ -98,8 +161,7 @@ class AdminAddBookFragment : Fragment() {
                         Integer.parseInt(binding.numberOfPagesInputAddBook.text.toString())
                     book.number_of_available_copies =
                         Integer.parseInt(binding.numberOfAvailableCopiesInputAddBook.text.toString())
-                    book.storage_Location = uploadEbook()
-                    if (!book.storage_Location.isNullOrBlank()) {
+                    if (!book.image_location.isNullOrBlank()||!book.image_location.isNullOrBlank()) {
                         //check if the document got updated or not
                         bookDbRef.set(book.getDataHashMap())
                             .addOnSuccessListener {
@@ -145,14 +207,26 @@ class AdminAddBookFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, 100)
     }
+    private fun SelectPdf() {
+        val intent = Intent()
+        intent.type = "application/pdf"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 101)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 100 && resultCode == RESULT_OK) {
             ImageURI = data?.data!!
-            submitBook()
-        }
+            book.image_location = image_upload()
+            binding.imageUploadField.setText(book.image_location.toString())
 
+        }
+        if (requestCode == 101 && resultCode == RESULT_OK) {
+            pdfURI = data?.data!!
+            book.pdf_location = pdf_upload()
+            binding.ebookUploadField.setText(book.pdf_location.toString())
+        }
     }
 }

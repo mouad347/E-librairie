@@ -179,23 +179,15 @@ class UserActivity : AppCompatActivity() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 if (error != null) {
-
                     Log.e("myError", "UserActivity:Firestore Error " + error.message.toString())
                     return
-
                 }
                 bookList.clear()
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED&&(dc.document.toObject(Book::class.java).name_book!!.toLowerCase(Locale.getDefault()).contains(searched))) {
-
                         bookList.add(dc.document.toObject(Book::class.java))
                     }
-
                 }
-
-
-
-
                 BAdapter.notifyDataSetChanged()
             }
         }
