@@ -35,8 +35,6 @@ class AdminAddBookFragment : Fragment() {
     lateinit var pdfURI:Uri
     var random: Random = Random()
     val book = Book()
-    var imageIsUploaded=false;
-    var pdfIsUploaded=false;
     //firebase database object (firestore)
     val db = Firebase.firestore
 

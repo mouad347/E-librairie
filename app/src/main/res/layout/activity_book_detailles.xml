@@ -193,13 +193,12 @@
             android:layout_marginTop="20dp"
             android:hint="                   Version Pdf">
 
-            <TextView
-                android:id="@+id/pdfversion"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/readPdfButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="pdf file"
-                android:clickable="false"/>
+                android:layout_weight="1"
+                android:text="read pdf" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="267dp"

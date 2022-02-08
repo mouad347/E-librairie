@@ -63,6 +63,8 @@ class rented_books_activity : AppCompatActivity() {
                 mIntent.putExtra("nbrpages", nbrpages.toString())
                 mIntent.putExtra("nbrAvailableB", nbrAvailableB.toString())
                 mIntent.putExtra("description", description)
+                mIntent.putExtra("location", newlist.pdf_location)
+
                 startActivity(mIntent)
                 finish()
             }

@@ -37,8 +37,6 @@ class ProfileUser : AppCompatActivity() {
         userFileRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
                 document.data!!["userType"]
-
-
                 val name = document.data!!["name"]
                 val email = document.data!!["email"]
                 val date = document.data!!["timestamp"]
