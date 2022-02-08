@@ -25,6 +25,13 @@ class ProfileUser : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
 
+        binding.backbut.setOnClickListener{
+
+            startActivity(Intent(this,  UserActivity::class.java))
+            finish()
+
+        }
+
        ProfileInfo()
     }
     private fun ProfileInfo() {
