@@ -4,15 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@drawable/backgound"
     tools:context=".rented_books_activity">
+
+
+    <EditText
+        android:id="@+id/searchkeyword"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="mot clé"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inputsearch"
+        android:layout_width="158dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="Rechercher nom"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myBooksResyclerView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="413dp"
+        android:layout_height="594dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="162dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:background="#6DA05B"
+        android:text="Mes Livres"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold|normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.bookmanagement
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class rented_books_activity : AppCompatActivity() {
     private lateinit var recyclerview: RecyclerView
@@ -63,6 +67,47 @@ class rented_books_activity : AppCompatActivity() {
                 finish()
             }
         })
+
+        SearchBooks("")
+        binding.inputsearch.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+
+
+                SearchBooks(s.toString())
+
+
+
+
+            }
+        })
+
+        binding.searchkeyword.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+
+
+                SearchBooksDesc(s.toString())
+
+
+
+
+            }
+        })
     }
 
     private fun getBooks() {
@@ -109,6 +154,111 @@ class rented_books_activity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             progressDialog.dismiss()
+        }
+    }
+
+    private fun SearchBooks(searchedBook:String) {
+        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
+
+
+
+        db = FirebaseFirestore.getInstance()
+
+        val userFileRef = db.collection("userInfos").document(firebaseAuth.uid.toString())
+        bookList.clear()
+        userFileRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                if (document.data!!["rentedBooks"] != null) {
+                    val rentedBooksIsbn: ArrayList<String> =
+                        document.data!!["rentedBooks"] as ArrayList<String>
+                    db.collection("books")
+                        .whereIn("isbn", rentedBooksIsbn)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                var mybook= document.toObject(Book::class.java)!!
+
+                                if(mybook.name_book!!.toLowerCase(Locale.getDefault()).contains(searched)){
+
+
+                                    bookList.add(mybook!!)
+                                    Log.d("test", "${document.id} => ${document.data}")
+                                }
+
+
+                            }
+                            BAdapter.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.w("test", "Error getting documents: ", exception)
+                        }
+                }
+                Log.d("myInfo", "DocumentSnapshot data: ${document.data!!["userType"]}")
+
+            } else {
+                Log.e("myError", "rentedBook activity : user document not found")
+            }
+
+        }.addOnFailureListener { e ->
+            Toast.makeText(
+                this,
+                "Echec de connexion a cause de ${e.message}!!!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    private fun SearchBooksDesc(searchedBook:String) {
+        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
+
+
+        db = FirebaseFirestore.getInstance()
+
+        val userFileRef = db.collection("userInfos").document(firebaseAuth.uid.toString())
+        bookList.clear()
+        userFileRef.get().addOnSuccessListener { document ->
+            if (document.data != null) {
+                if (document.data!!["rentedBooks"] != null) {
+                    val rentedBooksIsbn: ArrayList<String> =
+                        document.data!!["rentedBooks"] as ArrayList<String>
+                    db.collection("books")
+                        .whereIn("isbn", rentedBooksIsbn)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+
+                                var mybook= document.toObject(Book::class.java)!!
+
+                                if(mybook.description_book!!.toLowerCase(Locale.getDefault()).contains(searched)){
+
+
+                                    bookList.add(mybook!!)
+                                    Log.d("test", "${document.id} => ${document.data}")
+                                }
+
+
+
+
+
+
+                            }
+                            BAdapter.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.w("test", "Error getting documents: ", exception)
+                        }
+                }
+                Log.d("myInfo", "DocumentSnapshot data: ${document.data!!["userType"]}")
+
+            } else {
+                Log.e("myError", "rentedBook activity : user document not found")
+            }
+
+        }.addOnFailureListener { e ->
+            Toast.makeText(
+                this,
+                "Echec de connexion a cause de ${e.message}!!!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

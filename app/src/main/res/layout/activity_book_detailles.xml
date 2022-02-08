@@ -166,21 +166,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:hint="                      Auteur:">
-
+            android:hint="                      Auteur:"
+            android:clickable="false"
+            >
             <TextView
                 android:id="@+id/writer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="20dp"
-                android:text="nome de l'auteur"></TextView>
+                android:layout_gravity="center"
+                android:text="nome de l'auteur"
+                android:textAlignment="center"
+                ></TextView>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="267dp"
                 android:layout_height="36dp"
-                android:drawablePadding="10dp" />
+                android:drawablePadding="10dp"
+                android:editable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -195,36 +197,40 @@
                 android:id="@+id/pdfversion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginLeft="70dp"
-                android:text="         pdf file"></TextView>
+                android:layout_gravity="center"
+                android:text="pdf file"
+                android:clickable="false"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="267dp"
                 android:layout_height="30dp"
-                android:drawablePadding="10dp" />
+                android:drawablePadding="10dp"
+                android:editable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="364dp"
+            android:layout_width="310dp"
 
             android:layout_height="209dp"
+            android:layout_gravity="center"
+            android:clickable="false"
             android:hint="Description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="120dp"
                 android:layout_height="43dp"
-                android:layout_marginLeft="100dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:drawablePadding="10dp" />
+                android:drawablePadding="10dp"
+                android:editable="false" />
 
             <TextView
                 android:id="@+id/description"
-                android:layout_width="match_parent"
+                android:layout_width="306dp"
                 android:layout_height="103dp"
-                android:text="TextView"
-                />
+                android:layout_gravity="center"
+                android:text="TextView" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
