@@ -67,6 +67,7 @@ class BookDetailles : AppCompatActivity() {
             rentBookByUser(isbn)
             Toast.makeText(this, "the book is reserved ", Toast.LENGTH_SHORT).show()
         }
+
         updateIfReserved()
         readbutt.isEnabled=false
         fetchImage(findViewById(R.id.bookimg),imageLocation)
@@ -74,6 +75,7 @@ class BookDetailles : AppCompatActivity() {
 
     fun updateIfReserved() {
         val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser==null ) return
         db = FirebaseFirestore.getInstance()
 
         val userFileRef = db.collection("userInfos").document(firebaseUser!!.uid.toString())
