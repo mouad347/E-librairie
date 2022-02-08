@@ -62,7 +62,7 @@ class BookAdapter(var booklist: ArrayList<Book>) :
         holder.bookname.text = book.name_book
         holder.writername.text = book.name_writer
         holder.Nbrpage.text = book.number_of_pages.toString()
-        book.storage_location?.let { fetchImage(holder.bookimg, it) }
+        book.image_location?.let { fetchImage(holder.bookimg, it) }
 
     }
 

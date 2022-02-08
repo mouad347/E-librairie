@@ -1,10 +1,7 @@
 package com.example.bookmanagement
 
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.storage.FirebaseStorage
 
 
 class Book {
@@ -12,9 +9,10 @@ class Book {
     var name_book: String? = null
     var name_writer: String? = null
     var number_of_pages: Int? = null
-    var storage_location: String? = null
+    var image_location: String? = null
     var description_book: String? = null
     var number_of_available_copies: Int? = null
+    var pdf_location: String? = null
 
 
 
@@ -32,7 +30,7 @@ class Book {
         this.name_book = bookName
         this.name_writer = writerName
         this.number_of_pages = numberOfPages
-        this.storage_location = storageLocation
+        this.image_location = storageLocation
         this.description_book = description_book
         this.number_of_available_copies = number_of_available_copies
     }
@@ -48,9 +46,10 @@ class Book {
             "name_writer" to name_writer,
             "number_of_pages" to number_of_pages,
             "date_insert" to FieldValue.serverTimestamp(),
-            "storage_location" to storage_location,
+            "image_location" to image_location,
             "description_book" to description_book,
-            "number_of_available_copies" to number_of_available_copies
+            "number_of_available_copies" to number_of_available_copies,
+            "pdf_location" to pdf_location,
         )
     }
 

@@ -82,6 +82,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPagesInput_AddBook" />
 
+    <EditText
+        android:id="@+id/ebookUploadField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:hint="Click to uploadEbook"
+        app:layout_constraintBottom_toTopOf="@+id/imageUploadField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookDescriptionInput_AddBook" />
+
     <Button
         android:id="@+id/submitButton_AddBook"
         android:layout_width="wrap_content"
@@ -91,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDescriptionInput_AddBook" />
+        app:layout_constraintTop_toBottomOf="@+id/imageUploadField" />
 
     <Button
         android:id="@+id/button_second"
@@ -112,9 +125,24 @@
         android:gravity="start|top"
         android:hint="Description"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton_AddBook"
+        app:layout_constraintBottom_toTopOf="@+id/ebookUploadField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberOfAvailableCopiesInput_AddBook" />
+
+    <EditText
+        android:id="@+id/imageUploadField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="clickTo SelectImage"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton_AddBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ebookUploadField" />
 </androidx.constraintlayout.widget.ConstraintLayout>
