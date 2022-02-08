@@ -68,10 +68,7 @@ fun rentBookByUser(isbn: String) {
             Log.d("TAG", "get failed with ", exception)
         }
 
-    userFileRef
-        .update("capital", true)
-        .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
-        .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
+
 }
 
 

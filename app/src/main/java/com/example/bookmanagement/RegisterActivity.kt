@@ -123,6 +123,7 @@ class RegisterActivity : AppCompatActivity() {
             "name" to name,
             "profileImage" to "",
             "userType" to "user",
+            "rentedBooks" to ArrayList<String>(),
             "timestamp" to FieldValue.serverTimestamp()
         )
         val userFileRef = db.collection("userInfos").document(firebaseAuth.currentUser!!.uid)

@@ -131,7 +131,8 @@ class rented_books_activity : AppCompatActivity() {
         bookList.clear()
         userFileRef.get().addOnSuccessListener { document ->
             if (document.data != null) {
-                if (document.data!!["rentedBooks"] != null) {
+                if (document.data!!["rentedBooks"] != null && !(document.data!!["rentedBooks"] as ArrayList<String>).isEmpty()
+                ) {
                     val rentedBooksIsbn: ArrayList<String> =
                         document.data!!["rentedBooks"] as ArrayList<String>
                     db.collection("books")
