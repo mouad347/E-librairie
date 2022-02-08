@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookmanagement.databinding.ActivityRentedBooksBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import java.util.*
-import kotlin.collections.ArrayList
 
 class rented_books_activity : AppCompatActivity() {
     private lateinit var recyclerview: RecyclerView
@@ -64,6 +61,7 @@ class rented_books_activity : AppCompatActivity() {
                 mIntent.putExtra("nbrAvailableB", nbrAvailableB.toString())
                 mIntent.putExtra("description", description)
                 mIntent.putExtra("location", newlist.pdf_location)
+                mIntent.putExtra("imageLocation", newlist.image_location)
 
                 startActivity(mIntent)
                 finish()
@@ -75,17 +73,19 @@ class rented_books_activity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
 
                 SearchBooks(s.toString())
-
-
 
 
             }
@@ -95,17 +95,19 @@ class rented_books_activity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
 
                 SearchBooksDesc(s.toString())
-
-
 
 
             }
@@ -132,7 +134,7 @@ class rented_books_activity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
-                                var mybook= document.toObject(Book::class.java)!!
+                                var mybook = document.toObject(Book::class.java)!!
                                 bookList.add(mybook!!)
                                 Log.d("test", "${document.id} => ${document.data}")
                             }
@@ -159,8 +161,8 @@ class rented_books_activity : AppCompatActivity() {
         }
     }
 
-    private fun SearchBooks(searchedBook:String) {
-        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
+    private fun SearchBooks(searchedBook: String) {
+        val searched = searchedBook!!.toLowerCase(Locale.getDefault())
 
 
 
@@ -178,9 +180,11 @@ class rented_books_activity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
-                                var mybook= document.toObject(Book::class.java)!!
+                                var mybook = document.toObject(Book::class.java)!!
 
-                                if(mybook.name_book!!.toLowerCase(Locale.getDefault()).contains(searched)){
+                                if (mybook.name_book!!.toLowerCase(Locale.getDefault())
+                                        .contains(searched)
+                                ) {
 
 
                                     bookList.add(mybook!!)
@@ -209,8 +213,9 @@ class rented_books_activity : AppCompatActivity() {
             ).show()
         }
     }
-    private fun SearchBooksDesc(searchedBook:String) {
-        val searched=searchedBook!!.toLowerCase(Locale.getDefault())
+
+    private fun SearchBooksDesc(searchedBook: String) {
+        val searched = searchedBook!!.toLowerCase(Locale.getDefault())
 
 
         db = FirebaseFirestore.getInstance()
@@ -228,18 +233,16 @@ class rented_books_activity : AppCompatActivity() {
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
 
-                                var mybook= document.toObject(Book::class.java)!!
+                                var mybook = document.toObject(Book::class.java)!!
 
-                                if(mybook.description_book!!.toLowerCase(Locale.getDefault()).contains(searched)){
+                                if (mybook.description_book!!.toLowerCase(Locale.getDefault())
+                                        .contains(searched)
+                                ) {
 
 
                                     bookList.add(mybook!!)
                                     Log.d("test", "${document.id} => ${document.data}")
                                 }
-
-
-
-
 
 
                             }

@@ -90,6 +90,8 @@ class UserActivity : AppCompatActivity() {
                 mIntent.putExtra("nbrAvailableB", nbrAvailableB.toString())
                 mIntent.putExtra("description", description)
                 mIntent.putExtra("location", newlist.pdf_location)
+                mIntent.putExtra("imageLocation", newlist.image_location)
+
 
                 startActivity(mIntent)
                 finish()

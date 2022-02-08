@@ -1,9 +1,11 @@
 package com.example.bookmanagement
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.example.bookmanagement.databinding.ActivityProfileUserBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 class BookDetailles : AppCompatActivity() {
@@ -43,6 +46,7 @@ class BookDetailles : AppCompatActivity() {
         val nbrpages = BookIntent.getStringExtra("nbrpages").toString()
         val nbrAvailableB = BookIntent.getStringExtra("nbrAvailableB").toString()
         val description = BookIntent.getStringExtra("description").toString()
+        val imageLocation = BookIntent.getStringExtra("imageLocation").toString()
         bookpdfLocation= BookIntent.getStringExtra("location").toString()
 
         b.text = bookname
@@ -57,6 +61,7 @@ class BookDetailles : AppCompatActivity() {
         }
         updateIfReserved()
         readbutt.isEnabled=false
+        fetchImage(findViewById(R.id.bookimg),imageLocation)
     }
 
     fun updateIfReserved() {
@@ -81,6 +86,16 @@ class BookDetailles : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+    fun fetchImage(imageView: ImageView, imageStorageLocation:String){
+        val storageReference = FirebaseStorage.getInstance().reference
+        val photoReference = storageReference.child(imageStorageLocation)
+        val THREEE_MEGABYTES = (1024 * 1024*3).toLong()
+        photoReference.getBytes(THREEE_MEGABYTES).addOnSuccessListener { bytes ->
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            imageView.setImageBitmap(bmp)
+        }.addOnFailureListener {
         }
     }
 }
