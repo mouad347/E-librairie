@@ -3,6 +3,7 @@ package com.example.bookmanagement
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +15,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookmanagement.databinding.FragmentAdminAddBookBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import id.zelory.compressor.constraint.size
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.File
 
 
 class AdminAddBookFragment : Fragment() {
@@ -48,28 +58,43 @@ class AdminAddBookFragment : Fragment() {
     }
 
     private fun uploadEbook(): String? {
-
-
-        //functiion responsible for uploading the ebook file to firebase storage
+       // val bitmap = BitmapFactory.decodeFile(ImageURI.path)
+        var compressedImageFile: File? = null
         val storageRef = storage.reference
+        var actualImageFile = FileUtil.from(requireActivity().baseContext, ImageURI)
         val riversRef = storageRef.child("images/${ImageURI.lastPathSegment}")
-        var uploadTask = riversRef.putFile(ImageURI)
 
-        showToast(activity, "image =  " + ImageURI.toString())
+        var uploadTask: UploadTask? = null
 
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener {
-            showToast(activity, "pdf file upload failed ")
-            uploadTask.exception?.message?.let { it1 -> Log.w("BookAddition", it1) }
-        }.addOnSuccessListener { taskSnapshot ->
-            showToast(activity, "pdf file upload done ")
+        GlobalScope.launch {
+            compressedImageFile = Compressor.compress(requireContext(), actualImageFile) {
+                resolution(853, 480)
+                quality(60)
+                format(Bitmap.CompressFormat.WEBP)
+                size(1_048_576) // 1 MB
+            }
+            //functiion responsible for uploading the ebook file to firebase storage
+            //  showToast(activity, "image =  " + ImageURI.toString())
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask = riversRef.putStream(compressedImageFile!!.inputStream())
+            uploadTask!!.addOnFailureListener {
+            //    showToast(activity, "pdf file upload failed ")
+                uploadTask!!.exception?.message?.let { it1 -> Log.w("BookAddition", it1) }
+            }.addOnSuccessListener { taskSnapshot ->
+            //    showToast(activity, "pdf file upload done ")
+            }
         }
-        while (!uploadTask.isComplete) {
+        while (uploadTask==null || !(uploadTask!!.isComplete)) {
             //wait for the task to complete
+            Thread.sleep(1000)
             // TODO: 20/01/2022  look up for async await comm 
         }
-        if (uploadTask.isSuccessful) return "images/${ImageURI.lastPathSegment}"
-        else return null
+        if (uploadTask!!.isSuccessful) {
+            showToast(activity, "image file upload done ")
+            return "images/${ImageURI.lastPathSegment}"}
+        else { showToast(activity, "pdf file upload failed ")
+            return null}
+
     }
 
     fun submitBook() {
@@ -98,8 +123,8 @@ class AdminAddBookFragment : Fragment() {
                         Integer.parseInt(binding.numberOfPagesInputAddBook.text.toString())
                     book.number_of_available_copies =
                         Integer.parseInt(binding.numberOfAvailableCopiesInputAddBook.text.toString())
-                    book.storage_Location = uploadEbook()
-                    if (!book.storage_Location.isNullOrBlank()) {
+                    book.storage_location = uploadEbook()
+                    if (!book.storage_location.isNullOrBlank()) {
                         //check if the document got updated or not
                         bookDbRef.set(book.getDataHashMap())
                             .addOnSuccessListener {
