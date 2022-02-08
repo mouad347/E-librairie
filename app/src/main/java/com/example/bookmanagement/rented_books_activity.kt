@@ -40,7 +40,6 @@ class rented_books_activity : AppCompatActivity() {
 
         recyclerview.adapter = BAdapter
 
-        getBooks()
         BAdapter.setonItemClickListener(object : BookAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 // Toast.makeText(this@UserActivity,"you clicked on item .$position",Toast.LENGTH_SHORT).show()
@@ -114,52 +113,6 @@ class rented_books_activity : AppCompatActivity() {
         })
     }
 
-    private fun getBooks() {
-        var progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Loading books")
-        progressDialog.setCanceledOnTouchOutside(false)
-
-        db = FirebaseFirestore.getInstance()
-        progressDialog.show()
-
-        val userFileRef = db.collection("userInfos").document(firebaseAuth.uid.toString())
-
-        userFileRef.get().addOnSuccessListener { document ->
-            if (document.data != null) {
-                if (document.data!!["rentedBooks"] != null) {
-                    val rentedBooksIsbn: ArrayList<String> =
-                        document.data!!["rentedBooks"] as ArrayList<String>
-                    db.collection("books")
-                        .whereIn("isbn", rentedBooksIsbn)
-                        .get()
-                        .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                var mybook = document.toObject(Book::class.java)!!
-                                bookList.add(mybook!!)
-                                Log.d("test", "${document.id} => ${document.data}")
-                            }
-                            BAdapter.notifyDataSetChanged()
-                            progressDialog.dismiss()
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.w("test", "Error getting documents: ", exception)
-                        }
-                }
-                Log.d("myInfo", "DocumentSnapshot data: ${document.data!!["userType"]}")
-
-            } else {
-                Log.e("myError", "rentedBook activity : user document not found")
-            }
-
-        }.addOnFailureListener { e ->
-            Toast.makeText(
-                this,
-                "Echec de connexion a cause de ${e.message}!!!",
-                Toast.LENGTH_SHORT
-            ).show()
-            progressDialog.dismiss()
-        }
-    }
 
     private fun SearchBooks(searchedBook: String) {
         val searched = searchedBook!!.toLowerCase(Locale.getDefault())
