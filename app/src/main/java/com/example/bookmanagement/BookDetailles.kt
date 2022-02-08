@@ -4,10 +4,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookmanagement.databinding.ActivityProfileUserBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +34,16 @@ class BookDetailles : AppCompatActivity() {
         val d = findViewById<TextView>(R.id.description)
         reservbut = findViewById<Button>(R.id.reserveBook)
         readbutt = findViewById(R.id.readPdfButton)
+
+        val back=findViewById<ImageButton>(R.id.goback)
+
+        back.setOnClickListener(){
+            startActivity(Intent(this, UserActivity::class.java))
+            finish()
+
+        }
+
+
         val BookIntent = intent
         firebaseAuth = FirebaseAuth.getInstance()
         isbn = BookIntent.getStringExtra("isbn").toString()
@@ -48,6 +55,7 @@ class BookDetailles : AppCompatActivity() {
         val description = BookIntent.getStringExtra("description").toString()
         val imageLocation = BookIntent.getStringExtra("imageLocation").toString()
         bookpdfLocation= BookIntent.getStringExtra("location").toString()
+
 
         b.text = bookname
         wr.text = writer

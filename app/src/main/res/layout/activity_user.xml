@@ -33,12 +33,12 @@
 
         <TextView
             android:id="@+id/subTitleTv"
-            android:layout_width="109dp"
-            android:layout_height="21dp"
+            android:layout_width="128dp"
+            android:layout_height="24dp"
             android:layout_below="@+id/titleTv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="104dp"
+            android:layout_marginEnd="68dp"
             android:text="test@mail.com"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/logoutBtn"

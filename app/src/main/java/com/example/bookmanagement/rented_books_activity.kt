@@ -67,6 +67,12 @@ class rented_books_activity : AppCompatActivity() {
             }
         })
 
+        binding.backbut.setOnClickListener(){
+            startActivity(Intent(this, UserActivity::class.java))
+            finish()
+
+        }
+
         SearchBooks("")
         binding.inputsearch.addTextChangedListener(object : TextWatcher {
 
