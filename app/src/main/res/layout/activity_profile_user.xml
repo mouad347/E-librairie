@@ -10,28 +10,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="405dp">
+
         <LinearLayout
-            android:background="@drawable/gradientbackground"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:background="@drawable/gradientbackground"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/imgprofil"
-                android:layout_marginTop="45dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/user">
+
             <TextView
                 android:id="@+id/nomprofil"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:text="Mouad bhih"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:textSize="21sp"/>
+                android:textSize="21sp"
+                android:textStyle="bold" />
         </LinearLayout>
         <androidx.cardview.widget.CardView
             android:layout_width="400dp"
