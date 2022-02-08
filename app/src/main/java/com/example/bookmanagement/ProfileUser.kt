@@ -39,7 +39,7 @@ class ProfileUser : AppCompatActivity() {
                 document.data!!["userType"]
                 val name = document.data!!["name"]
                 val email = document.data!!["email"]
-                val date = document.data!!["timestamp"]
+             //   val date = document.data!!["timestamp"]
                 val annee = document.data!!["annee"]
                 val telephone = document.data!!["telephone"]
 
@@ -52,7 +52,7 @@ class ProfileUser : AppCompatActivity() {
 
                 binding.nomprofil.text = name.toString()
                 binding.emailprofile.text=email.toString()
-                binding.dateinscription.text=date.toString()
+              //  binding.dateinscription.text=date.toString()
                 binding.annee.text=annee.toString()
                 binding.phonenumber.text=telephone.toString()
                 binding.nbrReservedBooks.text=nbrlivrereserve.toString()
