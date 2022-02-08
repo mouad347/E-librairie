@@ -165,6 +165,7 @@ class UserActivity : AppCompatActivity() {
 
         } else {
             //logged in,get and show user info
+
             val email = firebaseUser.email
             //set to textview of toolbar
             binding.subTitleTv.text = email
