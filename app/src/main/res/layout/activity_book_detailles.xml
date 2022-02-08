@@ -1,151 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookDetailles">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    tools:context=".BookDetailles"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="113dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="280dp"
-            android:layout_weight="1"
-            android:text="Nom du livre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="300dp"
+        android:background="#fece2f"
+        android:padding="20dp">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="321dp"
-            android:layout_height="265dp"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:id="@+id/bookimg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="109dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="12dp"
-            android:text="auteur"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="20dp"
-            android:text="nombre de pages"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="142dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="24dp"
-            android:text="copies  disponibles"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName2"
-            android:layout_width="166dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="24dp"
-            android:clickable="false"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="Description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="220dp"
-            android:layout_height="82dp"
-            android:layout_marginTop="32dp"
-            android:text="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-        <TextView
-            android:id="@+id/writer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="7dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/nbrpages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/availablecopies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="14dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            android:id="@+id/reserveBook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:text="Reserver"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
-            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="118dp"
+            android:layout_toEndOf="@+id/bookimg"
+            android:background="#ABA5A5"
+            android:text="Nom du livre :"
+            android:textStyle="bold|normal" />
 
         <TextView
             android:id="@+id/bookname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="112dp"
-            android:layout_marginBottom="11dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_below="@+id/textView8"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@+id/bookimg"
+            android:text="Python for beginners" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/reserveBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="-89dp"
+            android:layout_marginTop="73dp"
+            android:layout_marginEnd="82dp"
+            android:layout_toEndOf="@+id/textView8"
+            android:backgroundTint="#6DA05B"
+            android:text="Reserver"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-100dp"
+        android:layout_width="match_parent"
+        android:padding="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="125dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            app:cardBackgroundColor="#fece2f"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:padding="5dp">
+
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/nbrpages"
+                    android:layout_alignBottom="@+id/nbrpages"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="-26dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="#ABA5A5"
+                    android:text="Nombre pages:"
+                    android:textStyle="bold|normal" />
+
+                <TextView
+                    android:id="@+id/nbrpages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="58dp"
+                    android:layout_marginEnd="71dp"
+                    android:text="250" />
+
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="125dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            app:cardBackgroundColor="#fece2f"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:padding="5dp">
+
+
+                <TextView
+                    android:id="@+id/textview11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/availablecopies"
+                    android:layout_alignBottom="@+id/availablecopies"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="-26dp"
+                    android:layout_marginEnd="21dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="#ABA5A5"
+                    android:text="Disponible:"
+                    android:textStyle="bold|normal" />
+
+                <TextView
+                    android:id="@+id/availablecopies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="58dp"
+                    android:layout_marginEnd="71dp"
+                    android:text="17" />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:hint="                      Auteur:">
+
+            <TextView
+                android:id="@+id/writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:text="nome de l'auteur"></TextView>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="267dp"
+                android:layout_height="36dp"
+                android:drawablePadding="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:hint="                   Version Pdf">
+
+            <TextView
+                android:id="@+id/pdfversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="70dp"
+                android:text="         pdf file"></TextView>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="267dp"
+                android:layout_height="30dp"
+                android:drawablePadding="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="364dp"
+
+            android:layout_height="209dp"
+            android:hint="Description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="120dp"
+                android:layout_height="43dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="10dp" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:text="TextView"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
